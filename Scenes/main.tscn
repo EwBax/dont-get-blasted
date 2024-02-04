@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://uqx0lbd1tol0"]
+
+[ext_resource type="PackedScene" uid="uid://cjqi4mmoyjotj" path="res://Scenes/player_ship.tscn" id="1_upeko"]
+[ext_resource type="Texture2D" uid="uid://b3ovctoeid0y3" path="res://Art/SpaceShooterAssetPack_BackGrounds.png" id="2_x3lo2"]
+
+[node name="Main" type="Node"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 320.0
+offset_top = 1.0
+offset_right = 500.0
+offset_bottom = 321.0
+rotation = 1.5708
+texture = ExtResource("2_x3lo2")
+
+[node name="PlayerShip" parent="." instance=ExtResource("1_upeko")]
