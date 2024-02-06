@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjqi4mmoyjotj"]
+[gd_scene load_steps=7 format=3 uid="uid://cjqi4mmoyjotj"]
 
-[ext_resource type="Script" path="res://Scenes/player_ship.gd" id="1_15aep"]
+[ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_15aep"]
 [ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_vrq5j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_il6bw"]
@@ -23,7 +23,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"bank_port",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -31,7 +31,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"bank_starboard",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -39,11 +39,8 @@ animations = [{
 }],
 "loop": true,
 "name": &"fly",
-"speed": 5.0
+"speed": 1.0
 }]
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ies8c"]
-points = PackedVector2Array(-8, -8, 2, -8, 8, -2, 8, 2, 2, 8, -8, 8, -6, 0)
 
 [node name="PlayerShip" type="Area2D"]
 position = Vector2(38, 77)
@@ -54,7 +51,10 @@ speed = 150
 rotation = 1.5708
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_3ke1h")
-animation = &"bank_port"
+animation = &"fly"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("ConvexPolygonShape2D_ies8c")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(4.17233e-07, 4.17233e-07)
+polygon = PackedVector2Array(-8, -8, 2, -8, 8, -2, 8, 2, 2, 8, -8, 8)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

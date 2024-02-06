@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjab500uch653"]
+
+[ext_resource type="Script" path="res://Scripts/asteroid.gd" id="1_liw46"]
+[ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="2_3y716"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkgk5"]
+atlas = ExtResource("2_3y716")
+region = Rect2(40, 40, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ymak2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkgk5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7skc"]
+radius = 7.0
+height = 18.0
+
+[node name="Asteroid" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_liw46")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ymak2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_e7skc")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
