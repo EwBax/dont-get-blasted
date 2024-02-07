@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://uqx0lbd1tol0"]
+[gd_scene load_steps=7 format=3 uid="uid://uqx0lbd1tol0"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_loid2"]
-[ext_resource type="PackedScene" uid="uid://cjqi4mmoyjotj" path="res://Scenes/player_ship.tscn" id="1_upeko"]
+[ext_resource type="PackedScene" uid="uid://cjqi4mmoyjotj" path="res://Scenes/player.tscn" id="1_upeko"]
 [ext_resource type="PackedScene" uid="uid://cjab500uch653" path="res://Scenes/asteroid.tscn" id="2_hi5e8"]
 [ext_resource type="Texture2D" uid="uid://b3ovctoeid0y3" path="res://Art/SpaceShooterAssetPack_BackGrounds.png" id="2_x3lo2"]
+[ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/laser_bolt.tscn" id="5_10j4g"]
 
 [sub_resource type="Curve2D" id="Curve2D_qivxg"]
 _data = {
@@ -31,7 +32,8 @@ one_shot = true
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
-[node name="PlayerShip" parent="." instance=ExtResource("1_upeko")]
+[node name="Player" parent="." instance=ExtResource("1_upeko")]
+laser_bolt_scene = ExtResource("5_10j4g")
 
 [node name="AsteroidSpawnPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_qivxg")
@@ -39,5 +41,8 @@ curve = SubResource("Curve2D_qivxg")
 [node name="AsteroidSpawnLocation" type="PathFollow2D" parent="AsteroidSpawnPath"]
 position = Vector2(320, 15)
 rotation = 1.5708
+
+[node name="PlayerStartLocation" type="Node2D" parent="."]
+position = Vector2(60, 90)
 
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]

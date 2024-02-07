@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bxi0xad6vb4k8"]
+
+[ext_resource type="Texture2D" uid="uid://sbcvi4lmv486" path="res://Art/SpaceShooterAssetPack_Projectiles.png" id="1_pv3u5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7uca"]
+atlas = ExtResource("1_pv3u5")
+region = Rect2(0, 8, 8, 8)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7uca")
+}],
+"loop": true,
+"name": &"PlayerLaser",
+"speed": 5.0
+}]

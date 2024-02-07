@@ -6,12 +6,11 @@ var score
 
 func _ready():
 	$AsteroidTimer.start()
+	$Player.position = $PlayerStartLocation.position
 
 
 # spawns a new asteroid on timeout
 func _on_asteroid_timer_timeout():
-	
-	print("time")
 	
 	# instantiating a new asteroid
 	var asteroid = asteroid_scene.instantiate()
