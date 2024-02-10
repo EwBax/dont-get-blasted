@@ -19,6 +19,7 @@ func _ready():
 
 
 func start(pos):
+	hit_points = hit_point_maximum
 	$AnimatedSprite2D.play("fly")
 	hp_updated.emit(hit_points)
 	position = pos

@@ -14,7 +14,7 @@ _data = {
 }
 point_count = 2
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" groups=["score_tracker"]]
 script = ExtResource("1_loid2")
 asteroid_scene = ExtResource("2_hi5e8")
 
@@ -32,9 +32,7 @@ wait_time = 0.5
 wait_time = 2.0
 one_shot = true
 
-[node name="ScoreTimer" type="Timer" parent="."]
-
-[node name="Menu" parent="." instance=ExtResource("4_o4klt")]
+[node name="Menu" parent="." groups=["score_tracker"] instance=ExtResource("4_o4klt")]
 
 [node name="HUD" parent="." instance=ExtResource("4_6dph7")]
 

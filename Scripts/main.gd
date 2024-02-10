@@ -4,6 +4,11 @@ extends Node
 @export var asteroid_scene: PackedScene
 var score
 
+
+func _ready():
+	$HUD.hide()
+
+
 # spawns a new asteroid on timeout
 func _on_asteroid_timer_timeout():
 	
@@ -31,15 +36,29 @@ func _on_asteroid_timer_timeout():
 	add_child(asteroid)
 
 
+func game_over():
+	$AsteroidTimer.stop()
+	$Player.hide()
+	$Menu.show()
+
+
+func add_points(points):
+	score += points
+	$HUD.update_score(score)
+
+
 func _on_player_hp_updated(hit_points):
 	$HUD.update_health_bar(hit_points)
+	if hit_points == 0:
+		game_over()
 
 
 func new_game():
+	$HUD.show()
 	score = 0
+	$Player.start($PlayerStartLocation.position)
 	$HUD.update_score(score)
 	$HUD.update_health_bar($Player.hit_points)
-	$Player.start($PlayerStartLocation.position)
 	$StartTimer.start()
 
 

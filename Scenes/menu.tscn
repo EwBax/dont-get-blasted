@@ -10,13 +10,15 @@ script = ExtResource("1_mm3ra")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -76.0
-offset_top = 18.0
-offset_right = 82.0
-offset_bottom = 34.0
+offset_left = -160.0
+offset_top = 45.0
+offset_right = 160.0
+offset_bottom = 61.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1_vwcum")
 text = "Don't Get Blasted!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
 anchors_preset = 8
