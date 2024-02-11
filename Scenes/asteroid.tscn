@@ -1,17 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjab500uch653"]
+[gd_scene load_steps=5 format=3 uid="uid://cjab500uch653"]
 
 [ext_resource type="Script" path="res://Scripts/asteroid.gd" id="1_liw46"]
-[ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="2_3y716"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hkgk5"]
-atlas = ExtResource("2_3y716")
-region = Rect2(40, 40, 8, 8)
+[ext_resource type="Texture2D" uid="uid://c1u48a2t4ahm2" path="res://Art/Asteroid.png" id="2_brae6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ymak2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hkgk5")
+"texture": ExtResource("2_brae6")
 }],
 "loop": true,
 "name": &"default",

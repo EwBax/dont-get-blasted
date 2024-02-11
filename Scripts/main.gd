@@ -22,14 +22,14 @@ func _on_asteroid_timer_timeout():
 	# setting the direction perpendicular to the spawn path
 	var direction = asteroid_spawn_location.rotation + PI / 2
 	# adding some randomness
-	direction += randf_range(-PI / 4, PI / 4)
+	direction += randf_range(-PI / 8, PI / 8)
 	
 	# setting the position and directoin of the asteroid
 	asteroid.position = asteroid_spawn_location.position
 	asteroid.rotation = direction
 	
 	# Choose the velocity for the asteroid
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	var velocity = Vector2(randf_range(150.0, 200.0), 0.0)
 	asteroid.linear_velocity = velocity.rotated(direction)
 	
 	# spawning the asteroid

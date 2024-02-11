@@ -9,7 +9,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 
 func _on_body_entered(body):
-	if (body.is_in_group("friendly")):
+	if body.is_in_group("friendly"):
 		get_tree().call_group("score_tracker", "add_points", point_value)
 	destroy()
 

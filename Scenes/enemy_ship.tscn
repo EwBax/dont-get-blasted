@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7xas3g646acg"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_ship.gd" id="1_o7dvd"]
+[ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_rhjid"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j46w7"]
+atlas = ExtResource("1_rhjid")
+region = Rect2(0, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jssex"]
+atlas = ExtResource("1_rhjid")
+region = Rect2(16, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwvf8"]
+atlas = ExtResource("1_rhjid")
+region = Rect2(8, 32, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o58n6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j46w7")
+}],
+"loop": true,
+"name": &"bank port",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jssex")
+}],
+"loop": true,
+"name": &"bank_starboard",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwvf8")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[node name="EnemyShip" type="RigidBody2D"]
+script = ExtResource("1_o7dvd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o58n6")
+animation = &"fly"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(1, -4, 1, 0, -1, 0, -1, -4, -2, -4, -4, 0, -4, 2, -2, 4, 2, 4, 4, 2, 4, 0, 2, -4)
+
+[node name="TargetPosition" type="Node2D" parent="."]
