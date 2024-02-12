@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://uqx0lbd1tol0"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_loid2"]
-[ext_resource type="PackedScene" uid="uid://cjqi4mmoyjotj" path="res://Scenes/player.tscn" id="1_upeko"]
 [ext_resource type="PackedScene" uid="uid://cjab500uch653" path="res://Scenes/asteroid.tscn" id="2_hi5e8"]
 [ext_resource type="Texture2D" uid="uid://b3ovctoeid0y3" path="res://Art/SpaceShooterAssetPack_BackGrounds.png" id="2_x3lo2"]
 [ext_resource type="PackedScene" uid="uid://bbe8ttq8fb63r" path="res://Scenes/hud.tscn" id="4_6dph7"]
 [ext_resource type="PackedScene" uid="uid://yi1se5lsk0wk" path="res://Scenes/menu.tscn" id="4_o4klt"]
 [ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/laser_bolt.tscn" id="5_10j4g"]
+[ext_resource type="PackedScene" uid="uid://ch7bcjdjbowcc" path="res://Scenes/player.tscn" id="6_auipc"]
 
 [sub_resource type="Curve2D" id="Curve2D_qivxg"]
 _data = {
@@ -36,7 +36,7 @@ one_shot = true
 
 [node name="HUD" parent="." instance=ExtResource("4_6dph7")]
 
-[node name="Player" parent="." instance=ExtResource("1_upeko")]
+[node name="Player" parent="." groups=["friendly"] instance=ExtResource("6_auipc")]
 laser_bolt_scene = ExtResource("5_10j4g")
 
 [node name="AsteroidSpawnPath" type="Path2D" parent="."]

@@ -1,21 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjqi4mmoyjotj"]
+[gd_scene load_steps=8 format=3 uid="uid://ch7bcjdjbowcc"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_15aep"]
-[ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_vrq5j"]
+[ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_0ett5"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_vfg5i"]
+[ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/laser_bolt.tscn" id="2_0nmux"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_il6bw"]
-atlas = ExtResource("1_vrq5j")
+atlas = ExtResource("1_0ett5")
 region = Rect2(0, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3aj8"]
-atlas = ExtResource("1_vrq5j")
+atlas = ExtResource("1_0ett5")
 region = Rect2(16, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qtgdn"]
-atlas = ExtResource("1_vrq5j")
+atlas = ExtResource("1_0ett5")
 region = Rect2(8, 0, 8, 8)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3ke1h"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_3d1n3"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -42,21 +43,20 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-script = ExtResource("1_15aep")
-speed = 150
-metadata/_edit_group_ = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-rotation = 1.5708
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_3ke1h")
-animation = &"fly"
+script = ExtResource("1_vfg5i")
+laser_bolt_scene = ExtResource("2_0nmux")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(4.17233e-07, 4.17233e-07)
 polygon = PackedVector2Array(-8, -8, 2, -8, 8, -2, 8, 2, 2, 8, -8, 8)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_3d1n3")
+animation = &"fly"
 
 [node name="ProjectileFirePosition" type="Node2D" parent="."]
 position = Vector2(12, 0)
@@ -65,4 +65,6 @@ position = Vector2(12, 0)
 wait_time = 0.25
 one_shot = true
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="HitTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

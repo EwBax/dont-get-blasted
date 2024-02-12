@@ -15,12 +15,13 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7skc"]
-radius = 7.0
-height = 18.0
+radius = 8.0
+height = 16.0
 
 [node name="Asteroid" type="RigidBody2D"]
 collision_mask = 2
 gravity_scale = 0.0
+continuous_cd = 1
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_liw46")
