@@ -1,6 +1,5 @@
-extends Area2D
+extends CharacterBody2D
 
-signal hit()
 signal game_over()
 signal hp_updated(hit_points)
 
@@ -24,10 +23,14 @@ func start(pos):
 	hp_updated.emit(hit_points)
 	position = pos
 	show()
-	$CollisionPolygon2D.disabled = false
 
 
 func _process(delta):
+	if Input.is_action_pressed("primary_fire") and $LaserFireRate.is_stopped():
+		fire_laser()
+
+
+func _physics_process(delta):
 	# the player's velocity
 	var velocity = Vector2.ZERO
 	
@@ -40,8 +43,7 @@ func _process(delta):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-	if Input.is_action_pressed("primary_fire") and $LaserFireRate.is_stopped():
-		fire_laser()
+	
 	
 	# checking what animation to play
 	if velocity.y < 0:
@@ -55,24 +57,19 @@ func _process(delta):
 		velocity = velocity.normalized() * speed
 	
 	#updating the player's position on screen
-	position += velocity * delta
+	move_and_collide(velocity * delta)
+	
 	position = position.clamp(Vector2.ZERO, screen_size)
 
 
 # player hit by enemy or object
 func _on_body_entered(body):
 	
-	if body.has_method("_on_body_entered"):
-		body._on_body_entered(self)
-	
 	hit_points -= 1
-	hit.emit()
 	hp_updated.emit(hit_points)
 	if hit_points <= 0:
 		game_over.emit()
 		hide()
-		#Must be deferred as we can't change physics properties on a physics callback.
-		$CollisionPolygon2D.set_deferred("disabled", true)
 
 
 func fire_laser():
