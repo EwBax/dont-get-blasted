@@ -57,7 +57,7 @@ func _physics_process(delta):
 		velocity = velocity.normalized() * speed
 	
 	#updating the player's position on screen
-	var collision = move_and_collide(velocity * delta)
+	move_and_collide(velocity * delta)
 	
 	position = position.clamp(Vector2.ZERO, screen_size)
 
