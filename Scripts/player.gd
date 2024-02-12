@@ -62,8 +62,8 @@ func _process(delta):
 # player hit by enemy or object
 func _on_body_entered(body):
 	
-	if body.has_method("destroy"):
-		body.destroy()
+	if body.has_method("_on_body_entered"):
+		body._on_body_entered(self)
 	
 	hit_points -= 1
 	hit.emit()
