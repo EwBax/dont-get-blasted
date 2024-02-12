@@ -23,7 +23,6 @@ func start(pos):
 	hp_updated.emit(hit_points)
 	position = pos
 	show()
-	$CollisionPolygon2D.disabled = false
 
 
 func _process(delta):
@@ -59,23 +58,18 @@ func _physics_process(delta):
 	
 	#updating the player's position on screen
 	var collision = move_and_collide(velocity * delta)
-	if collision && $HitTimer.is_stopped():
-		hit(collision)
-		$HitTimer.start()
 	
 	position = position.clamp(Vector2.ZERO, screen_size)
 
 
 # player hit by enemy or object
-func hit(body):
+func _on_body_entered(body):
 	
 	hit_points -= 1
 	hp_updated.emit(hit_points)
 	if hit_points <= 0:
 		game_over.emit()
 		hide()
-		#Must be deferred as we can't change physics properties on a physics callback.
-		$CollisionPolygon2D.set_deferred("disabled", true)
 
 
 func fire_laser():
