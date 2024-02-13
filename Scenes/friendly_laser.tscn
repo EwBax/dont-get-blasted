@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://1t8wqnhxx8sf"]
+
+[ext_resource type="Script" path="res://Scripts/friendly_laser.gd" id="1_fa38q"]
+[ext_resource type="Texture2D" uid="uid://24g7opcjjvdf" path="res://Art/LasterBolt.png" id="2_q682y"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkb0x"]
+radius = 2.0
+height = 6.0
+
+[node name="FriendlyLaser" type="RigidBody2D" groups=["friendly"]]
+collision_layer = 2
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_fa38q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785398
+texture = ExtResource("2_q682y")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.5, 2.38419e-07)
+scale = Vector2(0.75, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_lkb0x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="on_screen_exited"]

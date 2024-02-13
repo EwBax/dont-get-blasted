@@ -16,7 +16,7 @@ func _on_asteroid_timer_timeout():
 	var asteroid = asteroid_scene.instantiate()
 	
 	# choosing a random location on the spawn path
-	var asteroid_spawn_location = $AsteroidSpawnPath/AsteroidSpawnLocation
+	var asteroid_spawn_location = $mobSpawnPath/MobSpawnLocation
 	asteroid_spawn_location.progress_ratio = randf()
 	
 	# setting the direction perpendicular to the spawn path

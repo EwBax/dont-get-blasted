@@ -34,6 +34,5 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_vwcum")
 text = "START"
-metadata/_edit_group_ = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b3ovctoeid0y3" path="res://Art/SpaceShooterAssetPack_BackGrounds.png" id="2_x3lo2"]
 [ext_resource type="PackedScene" uid="uid://bbe8ttq8fb63r" path="res://Scenes/hud.tscn" id="4_6dph7"]
 [ext_resource type="PackedScene" uid="uid://yi1se5lsk0wk" path="res://Scenes/menu.tscn" id="4_o4klt"]
-[ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/laser_bolt.tscn" id="5_10j4g"]
+[ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/friendly_laser.tscn" id="5_10j4g"]
 
 [sub_resource type="Curve2D" id="Curve2D_qivxg"]
 _data = {
@@ -32,6 +32,9 @@ wait_time = 0.5
 wait_time = 2.0
 one_shot = true
 
+[node name="EnemyShipTimer" type="Timer" parent="."]
+wait_time = 15.0
+
 [node name="Menu" parent="." groups=["score_tracker"] instance=ExtResource("4_o4klt")]
 
 [node name="HUD" parent="." instance=ExtResource("4_6dph7")]
@@ -39,10 +42,10 @@ one_shot = true
 [node name="Player" parent="." instance=ExtResource("1_upeko")]
 laser_bolt_scene = ExtResource("5_10j4g")
 
-[node name="AsteroidSpawnPath" type="Path2D" parent="."]
+[node name="MobSpawnPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_qivxg")
 
-[node name="AsteroidSpawnLocation" type="PathFollow2D" parent="AsteroidSpawnPath"]
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobSpawnPath"]
 position = Vector2(320, 15)
 rotation = 1.5708
 
