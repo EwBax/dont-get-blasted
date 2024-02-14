@@ -15,7 +15,7 @@ contact_monitor = true
 script = ExtResource("1_mb3gr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
+rotation = -1.5708
 texture = ExtResource("2_yt5iv")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
