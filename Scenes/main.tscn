@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://uqx0lbd1tol0"]
+[gd_scene load_steps=10 format=3 uid="uid://uqx0lbd1tol0"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_loid2"]
 [ext_resource type="PackedScene" uid="uid://ch7bcjdjbowcc" path="res://Scenes/player.tscn" id="1_upeko"]
 [ext_resource type="PackedScene" uid="uid://cjab500uch653" path="res://Scenes/asteroid.tscn" id="2_hi5e8"]
 [ext_resource type="Texture2D" uid="uid://b3ovctoeid0y3" path="res://Art/SpaceShooterAssetPack_BackGrounds.png" id="2_x3lo2"]
+[ext_resource type="PackedScene" uid="uid://b7xas3g646acg" path="res://Scenes/enemy_ship.tscn" id="3_36qd4"]
 [ext_resource type="PackedScene" uid="uid://bbe8ttq8fb63r" path="res://Scenes/hud.tscn" id="4_6dph7"]
 [ext_resource type="PackedScene" uid="uid://yi1se5lsk0wk" path="res://Scenes/menu.tscn" id="4_o4klt"]
 [ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/friendly_laser.tscn" id="5_10j4g"]
@@ -17,6 +18,7 @@ point_count = 2
 [node name="Main" type="Node" groups=["score_tracker"]]
 script = ExtResource("1_loid2")
 asteroid_scene = ExtResource("2_hi5e8")
+enemy_ship_scene = ExtResource("3_36qd4")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = 320.0
@@ -33,7 +35,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="EnemyShipTimer" type="Timer" parent="."]
-wait_time = 15.0
 
 [node name="Menu" parent="." groups=["score_tracker"] instance=ExtResource("4_o4klt")]
 
@@ -54,5 +55,6 @@ position = Vector2(60, 90)
 
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="EnemyShipTimer" to="." method="_on_enemy_ship_timer_timeout"]
 [connection signal="start_game" from="Menu" to="." method="new_game"]
 [connection signal="hp_updated" from="Player" to="." method="_on_player_hp_updated"]

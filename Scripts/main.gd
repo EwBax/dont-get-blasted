@@ -2,6 +2,7 @@ extends Node
 
 
 @export var asteroid_scene: PackedScene
+@export var enemy_ship_scene: PackedScene
 var score
 
 
@@ -16,7 +17,7 @@ func _on_asteroid_timer_timeout():
 	var asteroid = asteroid_scene.instantiate()
 	
 	# choosing a random location on the spawn path
-	var asteroid_spawn_location = $mobSpawnPath/MobSpawnLocation
+	var asteroid_spawn_location = $MobSpawnPath/MobSpawnLocation
 	asteroid_spawn_location.progress_ratio = randf()
 	
 	# setting the direction perpendicular to the spawn path
@@ -38,6 +39,7 @@ func _on_asteroid_timer_timeout():
 
 func game_over():
 	$AsteroidTimer.stop()
+	$EnemyShipTimer.stop()
 	$Player.hide()
 	$Menu.show()
 
@@ -64,3 +66,15 @@ func new_game():
 
 func _on_start_timer_timeout():
 	$AsteroidTimer.start()
+	$EnemyShipTimer.start()
+
+
+func _on_enemy_ship_timer_timeout():
+	var enemy_ship = enemy_ship_scene.instantiate()
+	
+	# choosing a random location on the spawn path
+	var ship_spawn_location = $MobSpawnPath/MobSpawnLocation
+	ship_spawn_location.progress_ratio = randf()
+	
+	enemy_ship.start(ship_spawn_location.position)
+	add_child(enemy_ship)

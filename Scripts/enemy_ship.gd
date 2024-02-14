@@ -1,6 +1,7 @@
-extends RigidBody2D
+extends CharacterBody2D
 
 @export var laser_bolt_scene : PackedScene
+@export var laser_speed = 300
 @export var max_move_distance = 40
 @export var min_move_distance = 10
 @export var speed = 50
@@ -19,8 +20,9 @@ func _ready():
 	x_min = screen_size.x * .67
 
 
-func _process(delta):
-	pass
+func start(start_position):
+	position = start_position
+	target_position = Vector2(position.x - 15, position.y)
 
 
 func _on_body_entered(body):
