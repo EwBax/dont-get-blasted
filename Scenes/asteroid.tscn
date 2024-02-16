@@ -20,6 +20,7 @@ radius = 8.0
 [node name="Asteroid" type="RigidBody2D"]
 collision_mask = 2
 gravity_scale = 0.0
+continuous_cd = 1
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_liw46")

@@ -104,4 +104,3 @@ func _on_laser_timer_timeout():
 	laser.linear_velocity = Vector2(-laser_speed, 0)
 	
 	add_child(laser)
-	
