@@ -45,6 +45,9 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 9
+speed = 150
+metadata/_edit_group_ = true
 script = ExtResource("1_vfg5i")
 laser_bolt_scene = ExtResource("2_0nmux")
 

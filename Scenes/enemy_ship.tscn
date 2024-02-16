@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7xas3g646acg"]
+[gd_scene load_steps=8 format=3 uid="uid://b7xas3g646acg"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_ship.gd" id="1_o7dvd"]
 [ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_rhjid"]
+[ext_resource type="PackedScene" uid="uid://7nppy5xn1nl0" path="res://Scenes/enemy_laser.tscn" id="2_8adig"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j46w7"]
 atlas = ExtResource("1_rhjid")
@@ -15,7 +16,7 @@ region = Rect2(16, 32, 8, 8)
 atlas = ExtResource("1_rhjid")
 region = Rect2(8, 32, 8, 8)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_n60a5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_rf7tr"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -23,7 +24,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"bank port",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -31,7 +32,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"bank_starboard",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -42,17 +43,35 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="EnemyShip" type="CharacterBody2D" groups=["enemies"]]
+scale = Vector2(2, 2)
+collision_mask = 6
 script = ExtResource("1_o7dvd")
+laser_bolt_scene = ExtResource("2_8adig")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_n60a5")
-animation = &"fly"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(1, -4, 1, 0, -1, 0, -1, -4, -2, -4, -4, 0, -4, 2, -2, 4, 2, 4, 4, 2, 4, 0, 2, -4)
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_rf7tr")
+animation = &"bank_starboard"
 
 [node name="TargetPosition" type="Node2D" parent="."]
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-4, -2, -4, 2, 0, 4, 2, 4, 4, 2, 4, -2, 2, -4, 0, -4)
+
+[node name="LaserTimer" type="Timer" parent="."]
+
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
+
+[node name="FirePosition" type="Node2D" parent="."]
+position = Vector2(-4.5, 0)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
