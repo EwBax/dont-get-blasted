@@ -76,5 +76,5 @@ func _on_enemy_ship_timer_timeout():
 	var ship_spawn_location = $MobSpawnPath/MobSpawnLocation
 	ship_spawn_location.progress_ratio = randf()
 	
-	enemy_ship.start(ship_spawn_location.position)
 	add_child(enemy_ship)
+	enemy_ship.start(ship_spawn_location.position)
