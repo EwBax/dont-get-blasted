@@ -8,7 +8,7 @@ radius = 2.0
 height = 6.0
 
 [node name="FriendlyLaser" type="RigidBody2D" groups=["friendly"]]
-collision_layer = 2
+collision_layer = 4
 gravity_scale = 0.0
 max_contacts_reported = 1
 contact_monitor = true

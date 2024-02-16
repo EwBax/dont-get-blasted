@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var laser_bolt_scene : PackedScene
-@export var laser_speed = 300
+@export var laser_speed = 100
 @export var max_move_distance = 80
 @export var min_move_distance = 30
 @export var speed = 50
@@ -100,7 +100,7 @@ func _on_laser_timer_timeout():
 	
 	var laser = laser_bolt_scene.instantiate()
 	
-	laser.position = Vector2(screen_size.x / 2, screen_size.y / 2)
+	laser.position = $FirePosition.position
 	laser.linear_velocity = Vector2(-laser_speed, 0)
 	
 	add_child(laser)

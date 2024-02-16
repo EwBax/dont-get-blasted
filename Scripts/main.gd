@@ -1,6 +1,7 @@
 extends Node
 
-
+@export var asteroid_max_speed = 150
+@export var asteroid_min_speed = 75
 @export var asteroid_scene: PackedScene
 @export var enemy_ship_scene: PackedScene
 var score
@@ -30,7 +31,7 @@ func _on_asteroid_timer_timeout():
 	asteroid.rotation = direction
 	
 	# Choose the velocity for the asteroid
-	var velocity = Vector2(randf_range(150.0, 200.0), 0.0)
+	var velocity = Vector2(randf_range(asteroid_min_speed, asteroid_max_speed), 0.0)
 	asteroid.linear_velocity = velocity.rotated(direction)
 	
 	# spawning the asteroid
@@ -40,6 +41,7 @@ func _on_asteroid_timer_timeout():
 func game_over():
 	$AsteroidTimer.stop()
 	$EnemyShipTimer.stop()
+	get_tree().call_group("enemies", "destroy")
 	$Player.hide()
 	$Menu.show()
 

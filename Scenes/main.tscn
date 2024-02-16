@@ -28,14 +28,14 @@ rotation = 1.5708
 texture = ExtResource("2_x3lo2")
 
 [node name="AsteroidTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 4.0
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="EnemyShipTimer" type="Timer" parent="."]
-one_shot = true
+wait_time = 8.0
 
 [node name="Menu" parent="." groups=["score_tracker"] instance=ExtResource("4_o4klt")]
 
