@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7xas3g646acg"]
+[gd_scene load_steps=10 format=3 uid="uid://b7xas3g646acg"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_ship.gd" id="1_o7dvd"]
 [ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_rhjid"]
 [ext_resource type="PackedScene" uid="uid://7nppy5xn1nl0" path="res://Scenes/enemy_laser.tscn" id="2_8adig"]
+[ext_resource type="AudioStream" uid="uid://ci3irutwqknu1" path="res://Sounds/alienshoot2.wav" id="4_e8fws"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4x5l5"]
 size = Vector2(4.5, 4)
@@ -76,6 +77,9 @@ wait_time = 0.75
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_e8fws")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

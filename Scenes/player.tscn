@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch7bcjdjbowcc"]
+[gd_scene load_steps=9 format=3 uid="uid://ch7bcjdjbowcc"]
 
 [ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_0ett5"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_vfg5i"]
 [ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/friendly_laser.tscn" id="2_0nmux"]
+[ext_resource type="AudioStream" uid="uid://djt8abby5tkn7" path="res://Sounds/alienshoot1.wav" id="4_ixtny"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_il6bw"]
 atlas = ExtResource("1_0ett5")
@@ -73,5 +74,8 @@ position = Vector2(12, 0)
 [node name="LaserFireRate" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ixtny")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

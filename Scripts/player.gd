@@ -84,3 +84,4 @@ func fire_laser():
 	add_child(laser_bolt)
 	
 	$LaserFireRate.start()
+	$LaserSound.play()

@@ -94,11 +94,11 @@ func destroy():
 	queue_free()
 
 
-func game_over():
-	moving = true
-	speed = 400
-	target_position = Vector2(-10, position.y)
-	$MoveTimer.stop()
+#func game_over():
+	#moving = true
+	#speed = 400
+	#target_position = Vector2(-10, position.y)
+	#$MoveTimer.stop()
 
 func _on_laser_timer_timeout():
 	# Don't want to shoot if moving
@@ -112,3 +112,4 @@ func _on_laser_timer_timeout():
 	
 	var parent = get_parent()
 	parent.add_child(laser)
+	$LaserSound.play()
