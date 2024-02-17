@@ -1,16 +1,16 @@
 extends CharacterBody2D
 
 @export var laser_bolt_scene : PackedScene
-@export var laser_speed = 100
+@export var laser_speed = 125
 @export var max_move_distance = 80
 @export var min_move_distance = 30
 @export var speed = 50
 @export var point_value = 15
-@export var hit_point_maximum = 2
+@export var hit_point_maximum = 5
 
 var pixel_offset = 8
 
-var hit_points = hit_point_maximum
+var hit_points
 var screen_size
 # the farthest left on the screen that the enemy will go
 var x_min
@@ -21,7 +21,7 @@ func _ready():
 	# getting the screen size for player bounds
 	screen_size = get_viewport_rect().size
 	# limiting enemy to rightmost third of screen
-	x_min = screen_size.x * 0.6667
+	x_min = screen_size.x * 0.5
 	target_position = position
 
 
@@ -52,13 +52,15 @@ func _physics_process(delta):
 
 
 func start(start_position):
+	hit_points = hit_point_maximum
 	position = start_position
-	target_position = Vector2(position.x - 30, position.y)
+	#target_position = Vector2(position.x - 30, position.y)
+	random_target_position()
 	moving = true
 	$LaserTimer.start()
 
 
-func _on_area_entered(body):
+func _on_area_2d_body_entered(body):
 	if body.is_in_group("friendly"):
 		hit_points -= 1
 		# make some kind of visual indication that it was hit
@@ -68,7 +70,7 @@ func _on_area_entered(body):
 
 
 # picks a random direction to move in, making sure not to go off screen
-func get_random_position():
+func random_target_position():
 	
 	# Starting with arbitrary out of range value
 	var random_position = Vector2(-1, -1)
@@ -92,15 +94,21 @@ func destroy():
 	queue_free()
 
 
-func _on_move_timer_timeout():
-	get_random_position()
-
+func game_over():
+	moving = true
+	speed = 400
+	target_position = Vector2(-10, position.y)
+	$MoveTimer.stop()
 
 func _on_laser_timer_timeout():
-	
+	# Don't want to shoot if moving
+	if $MoveTimer.is_stopped():
+		return
+		
 	var laser = laser_bolt_scene.instantiate()
 	
-	laser.position = $FirePosition.position
+	laser.position = Vector2(position.x - pixel_offset, position.y)
 	laser.linear_velocity = Vector2(-laser_speed, 0)
 	
-	add_child(laser)
+	var parent = get_parent()
+	parent.add_child(laser)

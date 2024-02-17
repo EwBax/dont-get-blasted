@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://7nppy5xn1nl0"]
 
-[ext_resource type="Script" path="res://Scripts/friendly_laser.gd" id="1_mb3gr"]
+[ext_resource type="Script" path="res://Scripts/enemy_laser.gd" id="1_mba85"]
 [ext_resource type="Texture2D" uid="uid://dtfn3wfn5kfre" path="res://Art/enemy_laser.png" id="2_yt5iv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkb0x"]
 radius = 2.0
 height = 6.0
 
-[node name="EnemyLaser" type="RigidBody2D" groups=["friendly"]]
+[node name="EnemyLaser" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 2
 gravity_scale = 0.0
 max_contacts_reported = 1
 contact_monitor = true
-script = ExtResource("1_mb3gr")
+script = ExtResource("1_mba85")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5708

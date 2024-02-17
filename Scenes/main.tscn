@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://uqx0lbd1tol0"]
+[gd_scene load_steps=9 format=3 uid="uid://uqx0lbd1tol0"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_loid2"]
 [ext_resource type="PackedScene" uid="uid://cjab500uch653" path="res://Scenes/asteroid.tscn" id="2_hi5e8"]
@@ -6,8 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b7xas3g646acg" path="res://Scenes/enemy_ship.tscn" id="3_36qd4"]
 [ext_resource type="PackedScene" uid="uid://bbe8ttq8fb63r" path="res://Scenes/hud.tscn" id="4_6dph7"]
 [ext_resource type="PackedScene" uid="uid://yi1se5lsk0wk" path="res://Scenes/menu.tscn" id="4_o4klt"]
-[ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/friendly_laser.tscn" id="5_10j4g"]
-
+[ext_resource type="PackedScene" uid="uid://ch7bcjdjbowcc" path="res://Scenes/player.tscn" id="7_kblou"]
 
 [sub_resource type="Curve2D" id="Curve2D_qivxg"]
 _data = {
@@ -15,7 +14,7 @@ _data = {
 }
 point_count = 2
 
-[node name="Main" type="Node" groups=["score_tracker"]]
+[node name="Main" type="Node2D" groups=["score_tracker"]]
 script = ExtResource("1_loid2")
 asteroid_scene = ExtResource("2_hi5e8")
 enemy_ship_scene = ExtResource("3_36qd4")
@@ -28,20 +27,20 @@ rotation = 1.5708
 texture = ExtResource("2_x3lo2")
 
 [node name="AsteroidTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 2.0
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="EnemyShipTimer" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 4.0
 
 [node name="Menu" parent="." groups=["score_tracker"] instance=ExtResource("4_o4klt")]
 
 [node name="HUD" parent="." instance=ExtResource("4_6dph7")]
 
-[node name="Player" parent="." groups=["friendly"] instance=ExtResource("6_auipc")]
+[node name="Player" parent="." instance=ExtResource("7_kblou")]
 
 [node name="MobSpawnPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_qivxg")
@@ -57,4 +56,5 @@ position = Vector2(60, 90)
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="EnemyShipTimer" to="." method="_on_enemy_ship_timer_timeout"]
 [connection signal="start_game" from="Menu" to="." method="new_game"]
+[connection signal="game_over" from="Player" to="." method="game_over"]
 [connection signal="hp_updated" from="Player" to="." method="_on_player_hp_updated"]

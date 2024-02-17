@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7xas3g646acg"]
+[gd_scene load_steps=9 format=3 uid="uid://b7xas3g646acg"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_ship.gd" id="1_o7dvd"]
 [ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_rhjid"]
 [ext_resource type="PackedScene" uid="uid://7nppy5xn1nl0" path="res://Scenes/enemy_laser.tscn" id="2_8adig"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4x5l5"]
+size = Vector2(4.5, 4)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j46w7"]
 atlas = ExtResource("1_rhjid")
@@ -23,7 +26,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_j46w7")
 }],
 "loop": true,
-"name": &"bank port",
+"name": &"bank_port",
 "speed": 1.0
 }, {
 "frames": [{
@@ -50,10 +53,14 @@ script = ExtResource("1_o7dvd")
 laser_bolt_scene = ExtResource("2_8adig")
 metadata/_edit_group_ = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, 0)
+shape = SubResource("RectangleShape2D_4x5l5")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_rf7tr")
-animation = &"bank_starboard"
+animation = &"bank_port"
 
 [node name="TargetPosition" type="Node2D" parent="."]
 
@@ -64,14 +71,13 @@ collision_mask = 6
 polygon = PackedVector2Array(-4, -2, -4, 2, 0, 4, 2, 4, 4, 2, 4, -2, 2, -4, 0, -4)
 
 [node name="LaserTimer" type="Timer" parent="."]
+wait_time = 0.75
 
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
-[node name="FirePosition" type="Node2D" parent="."]
-position = Vector2(-4.5, 0)
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
-[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="random_target_position"]

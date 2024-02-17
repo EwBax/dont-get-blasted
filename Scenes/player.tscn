@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ba8hkjsw5bdyw" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_0ett5"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_vfg5i"]
-[ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/laser_bolt.tscn" id="2_0nmux"]
+[ext_resource type="PackedScene" uid="uid://1t8wqnhxx8sf" path="res://Scenes/friendly_laser.tscn" id="2_0nmux"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_il6bw"]
 atlas = ExtResource("1_0ett5")
@@ -46,16 +46,16 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 9
-speed = 150
-metadata/_edit_group_ = true
 script = ExtResource("1_vfg5i")
 laser_bolt_scene = ExtResource("2_0nmux")
+metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(4.17233e-07, 4.17233e-07)
 polygon = PackedVector2Array(-6, -6, 1, -6, 6, -4.17233e-07, 2, 6, -6, 6)
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 9
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(4.17233e-07, 4.17233e-07)

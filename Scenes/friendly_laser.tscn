@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://1t8wqnhxx8sf"]
 
-[ext_resource type="Script" path="res://Scripts/friendly_laser.gd" id="1_fa38q"]
+[ext_resource type="Script" path="res://Scripts/laser.gd" id="1_fa38q"]
 [ext_resource type="Texture2D" uid="uid://24g7opcjjvdf" path="res://Art/LasterBolt.png" id="2_q682y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkb0x"]

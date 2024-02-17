@@ -24,7 +24,7 @@ func _on_asteroid_timer_timeout():
 	# setting the direction perpendicular to the spawn path
 	var direction = asteroid_spawn_location.rotation + PI / 2
 	# adding some randomness
-	direction += randf_range(-PI / 8, PI / 8)
+	direction += randf_range(-PI / 16, PI / 16)
 	
 	# setting the position and directoin of the asteroid
 	asteroid.position = asteroid_spawn_location.position
@@ -69,6 +69,7 @@ func new_game():
 func _on_start_timer_timeout():
 	$AsteroidTimer.start()
 	$EnemyShipTimer.start()
+	_on_enemy_ship_timer_timeout()
 
 
 func _on_enemy_ship_timer_timeout():
