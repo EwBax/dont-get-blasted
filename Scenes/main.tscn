@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://uqx0lbd1tol0"]
+[gd_scene load_steps=10 format=3 uid="uid://uqx0lbd1tol0"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_loid2"]
 [ext_resource type="PackedScene" uid="uid://cjab500uch653" path="res://Scenes/asteroid.tscn" id="2_hi5e8"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b7xas3g646acg" path="res://Scenes/enemy_ship.tscn" id="3_36qd4"]
 [ext_resource type="PackedScene" uid="uid://bbe8ttq8fb63r" path="res://Scenes/hud.tscn" id="4_6dph7"]
 [ext_resource type="PackedScene" uid="uid://yi1se5lsk0wk" path="res://Scenes/menu.tscn" id="4_o4klt"]
+[ext_resource type="PackedScene" uid="uid://cioblooi1wd81" path="res://Scenes/joystick.tscn" id="5_xdfpm"]
 [ext_resource type="PackedScene" uid="uid://ch7bcjdjbowcc" path="res://Scenes/player.tscn" id="7_kblou"]
 
 [sub_resource type="Curve2D" id="Curve2D_qivxg"]
@@ -25,6 +26,9 @@ offset_right = 500.0
 offset_bottom = 320.0
 rotation = 1.5708
 texture = ExtResource("2_x3lo2")
+
+[node name="Joystick" parent="." instance=ExtResource("5_xdfpm")]
+position = Vector2(58, 135)
 
 [node name="AsteroidTimer" type="Timer" parent="."]
 wait_time = 2.0
