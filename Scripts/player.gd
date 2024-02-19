@@ -9,6 +9,8 @@ signal hp_updated(hit_points)
 @export var hit_point_maximum = 3
 var hit_points = hit_point_maximum
 var screen_size
+var pixel_offset = 8
+var input_velocity = Vector2.ZERO
 
 
 func _ready():
@@ -26,40 +28,40 @@ func start(pos):
 
 
 func _process(delta):
+	# the player's velocity
+	input_velocity = Vector2.ZERO
+	
+	# checking for player input
+	if Input.is_action_pressed("move_up"):
+		input_velocity.y -= 1
+	if Input.is_action_pressed("move_down"):
+		input_velocity.y += 1
+	if Input.is_action_pressed("move_right"):
+		input_velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		input_velocity.x -= 1
+	
+	
+	# checking what animation to play
+	if input_velocity.y < 0:
+		$AnimatedSprite2D.play("bank_port")
+	elif input_velocity.y > 0:
+		$AnimatedSprite2D.play("bank_starboard")
+	else:
+		$AnimatedSprite2D.play("fly")
+	
+	if input_velocity.length() > 0:
+		input_velocity = input_velocity.normalized() * speed
 	if Input.is_action_pressed("primary_fire") and $LaserFireRate.is_stopped():
 		fire_laser()
 
 
 func _physics_process(delta):
-	# the player's velocity
-	var velocity = Vector2.ZERO
-	
-	# checking for player input
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	
-	
-	# checking what animation to play
-	if velocity.y < 0:
-		$AnimatedSprite2D.play("bank_port")
-	elif velocity.y > 0:
-		$AnimatedSprite2D.play("bank_starboard")
-	else:
-		$AnimatedSprite2D.play("fly")
-	
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
 	
 	#updating the player's position on screen
-	move_and_collide(velocity * delta)
+	move_and_collide(input_velocity * delta)
 	
-	position = position.clamp(Vector2.ZERO, screen_size)
+	position = position.clamp(Vector2(pixel_offset, pixel_offset), Vector2(screen_size.x - pixel_offset, screen_size.y - pixel_offset))
 
 
 # player hit by enemy or object
