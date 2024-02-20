@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpwqkqehu3pf6"]
+
+[ext_resource type="Texture2D" uid="uid://u1ff5deha1wt" path="res://Art/FireButton.png" id="1_jivb1"]
+
+[node name="FireButton" type="TouchScreenButton"]
+texture_normal = ExtResource("1_jivb1")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://uqx0lbd1tol0"]
+[gd_scene load_steps=11 format=3 uid="uid://uqx0lbd1tol0"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_loid2"]
 [ext_resource type="PackedScene" uid="uid://cjab500uch653" path="res://Scenes/asteroid.tscn" id="2_hi5e8"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://yi1se5lsk0wk" path="res://Scenes/menu.tscn" id="4_o4klt"]
 [ext_resource type="PackedScene" uid="uid://cioblooi1wd81" path="res://Scenes/joystick.tscn" id="5_xdfpm"]
 [ext_resource type="PackedScene" uid="uid://ch7bcjdjbowcc" path="res://Scenes/player.tscn" id="7_kblou"]
+[ext_resource type="PackedScene" uid="uid://cpwqkqehu3pf6" path="res://Scenes/fire_button.tscn" id="9_nu22l"]
 
 [sub_resource type="Curve2D" id="Curve2D_qivxg"]
 _data = {
@@ -41,11 +42,12 @@ wait_time = 4.0
 
 [node name="HUD" parent="." instance=ExtResource("4_6dph7")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("joystick") instance=ExtResource("7_kblou")]
+[node name="Player" parent="." node_paths=PackedStringArray("joystick", "fire_button") instance=ExtResource("7_kblou")]
 joystick = NodePath("../Joystick")
+fire_button = NodePath("../FireButton")
 
 [node name="Joystick" parent="." instance=ExtResource("5_xdfpm")]
-position = Vector2(58, 135)
+position = Vector2(18, 117)
 
 [node name="MobSpawnPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_qivxg")
@@ -56,6 +58,9 @@ rotation = 1.5708
 
 [node name="PlayerStartLocation" type="Node2D" parent="."]
 position = Vector2(60, 90)
+
+[node name="FireButton" parent="." instance=ExtResource("9_nu22l")]
+position = Vector2(270, 130)
 
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

@@ -4,10 +4,11 @@ signal game_over()
 signal hp_updated(hit_points)
 
 @export var laser_bolt_scene : PackedScene
-@export var speed = 200
+@export var speed = 150
 @export var laser_speed = 300
 @export var hit_point_maximum = 3
 @export var joystick: Joystick
+@export var fire_button: TouchScreenButton
 
 var hit_points = hit_point_maximum
 var screen_size
@@ -41,12 +42,14 @@ func _process(delta):
 		#input_velocity.x += 1
 	#if Input.is_action_pressed("move_left"):
 		#input_velocity.x -= 1
+	#if Input.is_action_pressed("primary_fire") and $LaserFireRate.is_stopped():
+		#fire_laser()
 	#=================================================================
 	
-	if Input.is_action_pressed("primary_fire") and $LaserFireRate.is_stopped():
-		fire_laser()
-	
 	input_velocity = joystick.position_vector
+	
+	if fire_button.is_pressed() and $LaserFireRate.is_stopped():
+		fire_laser()
 	
 	# checking what animation to play
 	if input_velocity.y < 0:
