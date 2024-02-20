@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var min_move_distance = 30
 @export var speed = 50
 @export var point_value = 15
-@export var hit_point_maximum = 5
+@export var hit_point_maximum = 3
 
 var pixel_offset = 8
 
